@@ -64,7 +64,7 @@ public class MainCreateRoundEncoder {
 		int crossSize = widthAndHeight / 10;
 		drawCross(g2d, widthAndHeight, crossSize);
         
-		File output = new File("c:\\_\\png-test.black-white.png");
+		File output = new File("c:\\_\\opticalencoder.png");
 	    try {
 			ImageIO.write(image, "png", output);
 		} catch (IOException e) {
