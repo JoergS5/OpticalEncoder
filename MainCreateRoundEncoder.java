@@ -128,9 +128,9 @@ public class MainCreateRoundEncoder {
 		for(int i=0; i < 30; i++) {
 			double pow = Math.pow(2, i);
 			if((double) maxDegree < pow) {
-				return i-1;
+				return i;
 			}
 		}
-		return 30;
+		return 100;
 	}
 }
