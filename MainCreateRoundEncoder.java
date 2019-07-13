@@ -29,7 +29,7 @@ public class MainCreateRoundEncoder {
         g2d.setColor(Color.white);
         g2d.fillRect(0, 0, widthAndHeight-1, widthAndHeight-1);
 
-        int degreeFactor = 10;
+        int degreeFactor = 100;
         int bitLength = getBitLength(degreeFactor);
         int thicknessOfBit = 5;
 		
