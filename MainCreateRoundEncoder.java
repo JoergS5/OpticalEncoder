@@ -35,11 +35,13 @@ public class MainCreateRoundEncoder {
 		
 		drawOuterRing(g2d, widthAndHeight, thicknessOfBit);		// with empty area between outer and gray code
 		
+		GrayCode gc = new GrayCode();
+		
 		for(int i= 0; i < bitLength; i++) {
 			int x = thicknessOfBit * i + thicknessOfBit * 2;		// bits and outer ring
 			int width = widthAndHeight - thicknessOfBit * 2 * i - thicknessOfBit * 4;
 			for(int degreeXX = 0; degreeXX < 360 * degreeFactor; degreeXX ++) {	// shall be int to be exact value and easy gray calculation
-				int graycode = getBinaryToGray(degreeXX);
+				int graycode = gc.getBinaryToGray(degreeXX);
 				
 				double degree = (double) degreeXX / (double) degreeFactor;
 				double degreeDiff = (double) 1.0 / (double) degreeFactor;
@@ -105,23 +107,6 @@ public class MainCreateRoundEncoder {
 		g2d.fill(new Arc2D.Double(x2, x2, width2, width2, 0, 360, Arc2D.PIE));
 	}
 
-	// code from https://en.wikipedia.org/wiki/Gray_code
-	int getBinaryToGray(int num)
-	{
-	    return num ^ (num >> 1);
-	}
-	
-	// code from https://en.wikipedia.org/wiki/Gray_code
-	int getGrayToBinary32(int num)
-	{
-	    num = num ^ (num >> 16);
-	    num = num ^ (num >> 8);
-	    num = num ^ (num >> 4);
-	    num = num ^ (num >> 2);
-	    num = num ^ (num >> 1);
-	    return num;
-	}
-	
 	private int getBitLength(int degreeFactor) {
 		int maxDegree = 360 * degreeFactor;
 		
