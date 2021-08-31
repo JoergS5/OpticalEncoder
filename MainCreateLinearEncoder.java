@@ -7,6 +7,15 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+/*
+ * 
+ * 600 dpi are 40 micrometer per dot
+ * radius 30: +-2350, 0.08 degree per dot (print 188 mm)
+ * radius 40: +-2950, 0.06 degree per dot (print 251 mm)
+ * radius 45: +-3300, 0.05 degree per dot (print 282 mm)
+ * radius 50: +-3700, 0.048 degree per dot (print 314 mm => part printable)
+ * 
+ */
 
 public class MainCreateLinearEncoder {
 	
@@ -15,42 +24,44 @@ public class MainCreateLinearEncoder {
 	}
 
 	public MainCreateLinearEncoder() {
-		int width = 150;		// 600 with 600 dpi => 2.6 cm
+		int bitwidth = 5;		// how many pixel width for one encoded bit
 		int maxvalue = 2350;
 		int minvalue = -2350;
 
-		drawScale(width, maxvalue, minvalue, "LinearEncoder600dpi");
+		drawScale(bitwidth, maxvalue, minvalue, "LinearEncoder600dpi");
 	}
 
-	private void drawScale(int width, int maxvalue, int minvalue, String filename) {
+	private void drawScale(int bitwidth, int maxvalue, int minvalue, String filename) {
 		int height = maxvalue + 1 - minvalue;
 		
 		int bitLength = getBitLength(maxvalue);
-        int thicknessOfBit = width / (bitLength + 6);
-        int imageWidth = (bitLength + 6) * thicknessOfBit;
+		int width = bitwidth * (bitLength + 6);
+        //int thicknessOfBit = width / (bitLength + 6);
+        //System.out.println("thickness of one bit: " + thicknessOfBit);
+        //int imageWidth = (bitLength + 6) * thicknessOfBit;
 		
-		BufferedImage image = new BufferedImage(imageWidth, height, BufferedImage.TYPE_BYTE_BINARY);
+		BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_BYTE_BINARY);
         Graphics2D g2d = image.createGraphics();
 
         g2d.setColor(Color.white);
-        g2d.fillRect(0, 0, imageWidth, height);
+        g2d.fillRect(0, 0, width, height);
 
         GrayCode gc = new GrayCode();
         
 		g2d.setColor(Color.black);
-		g2d.fillRect(0, 0, thicknessOfBit, height);
+		g2d.fillRect(0, 0, bitwidth, height);
         
 		g2d.setColor(Color.black);
-		g2d.fillRect((bitLength + 5) * thicknessOfBit, 0, thicknessOfBit, height);
+		g2d.fillRect((bitLength + 5) * bitwidth, 0, bitwidth, height);
 		
 		int currow = 0;
 		for(int value = maxvalue; value >= 0; value--) {
-			drawGrayCode(gc, currow, bitLength, thicknessOfBit, g2d, true, value);
+			drawGrayCode(gc, currow, bitLength, bitwidth, g2d, true, value);
 			currow++;
 		}
 		int ctmin = - minvalue;
 		for(int value = 1; value <= ctmin; value++) {
-			drawGrayCode(gc, currow, bitLength, thicknessOfBit, g2d, false, value);
+			drawGrayCode(gc, currow, bitLength, bitwidth, g2d, false, value);
 			currow++;
 		}
 		
