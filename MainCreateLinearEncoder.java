@@ -20,15 +20,16 @@ import javax.imageio.ImageIO;
 public class MainCreateLinearEncoder {
 	
 	public static void main(String[] args) {
-		new MainCreateLinearEncoder();
+		String filename = "c:\\_\\LinearEncoder600dpi.png";
+		new MainCreateLinearEncoder(filename);
 	}
 
-	public MainCreateLinearEncoder() {
+	public MainCreateLinearEncoder(String filename) {
 		int bitwidth = 5;		// how many pixel width for one encoded bit
 		int maxvalue = 2350;
 		int minvalue = -2350;
 
-		drawScale(bitwidth, maxvalue, minvalue, "LinearEncoder600dpi");
+		drawScale(bitwidth, maxvalue, minvalue, filename);
 	}
 
 	private void drawScale(int bitwidth, int maxvalue, int minvalue, String filename) {
@@ -36,9 +37,6 @@ public class MainCreateLinearEncoder {
 		
 		int bitLength = getBitLength(maxvalue);
 		int width = bitwidth * (bitLength + 6);
-        //int thicknessOfBit = width / (bitLength + 6);
-        //System.out.println("thickness of one bit: " + thicknessOfBit);
-        //int imageWidth = (bitLength + 6) * thicknessOfBit;
 		
 		BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_BYTE_BINARY);
         Graphics2D g2d = image.createGraphics();
@@ -65,7 +63,7 @@ public class MainCreateLinearEncoder {
 			currow++;
 		}
 		
-		File output = new File("c:\\_\\" + filename + ".png");
+		File output = new File(filename);
 	    try {
 			ImageIO.write(image, "png", output);
 		} catch (IOException e) {
