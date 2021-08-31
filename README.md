@@ -8,5 +8,4 @@ MainCreateLinearEncoder.java is a program to create the OpticalEncoder printout 
 - the created png should be tagges with dpi values 600 dpi resolution in both directions
 - the printout is 20 cm long, which is 360° for a 30 mm radius circle
 - the printer setup shall print the original size with dpi settings without resizing
-- it may be good to offset printouts to different print areas. My printer fails printing out good copies after a few black printouts at the same location
-The resoltuion can be higher than printer's resolution using the camera to analyze dot positions. The 600 dpi dots are 40 micrometers each, camera pixel are often 2 micrometer or less.
+- The resoltuion can be higher than printer's resolution using the camera to analyze dot positions. The 600 dpi dots are 40 micrometers each, camera pixel are often 2 micrometer or less.
