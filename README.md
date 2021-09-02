@@ -14,4 +14,8 @@ Parameters of the program:
 - bitwidth: how many dots for every bit, the +- marker and the edge lines left and right
 - maxvalue and minvalue for values which shall be gray encoded
 
+MainLinearColorMultiple creates a printout of multiple graycoded
+- if the camera cannot be placed exactly, this allows reading of the signals, because they are redundant
+- the code is parametrized more than before, eg colors, bit and separator widths, number of the multiplicity
+
 MainCreateRoundEncoder creates round printouts. The dot positions are not exact, so this method is deprecated, the program remains for archiving and contains bugs.
